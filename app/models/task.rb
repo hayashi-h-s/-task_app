@@ -1,0 +1,27 @@
+class Task < ApplicationRecord
+  def self.ransackable_attributes(auth_abject = nil)
+    %w[name created_at]
+  end
+
+  def self.ransackable_associations(auth_abject = nil)
+    []
+  end
+
+
+
+    validates :name, presence: true
+    validates :name, length: { maximum: 30 }
+
+    validate :validate_name_not_including_conmma
+
+    belongs_to :user
+
+    scope :recent, -> { order(created_at: :desc)}
+
+    private
+
+      def validate_name_not_including_conmma
+        errors.add(:name,'にカンマを含めることはできません') if name&.include?(',')
+      end
+
+end
