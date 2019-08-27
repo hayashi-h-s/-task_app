@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true).recent
+    @tasks = @q.result(distinct: true).page(params[:page]).per(10)
   end
 
   def show
@@ -32,6 +32,7 @@ class TasksController < ApplicationController
     end
 
     if @task.save
+      TaskMailer.creation_email(@task).deliver_now
       logger.debug "task: #{@task.attributes.inspect}"
       redirect_to root_path,notice: "タスク「#{@task.name}」を登録しました。"
     else
@@ -56,7 +57,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description, :image)
     # strong Parmeters
   end
 

@@ -72,3 +72,5 @@ gem 'bootstrap', '~> 4.1.1'
 gem 'rails_autolink'
 
 gem "ransack"
+
+gem 'kaminari'
