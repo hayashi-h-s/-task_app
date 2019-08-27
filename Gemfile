@@ -78,3 +78,6 @@ gem 'rails_autolink'
 gem "ransack"
 
 gem 'kaminari'
+
+gem 'carrierwave'
+#動画投稿機能

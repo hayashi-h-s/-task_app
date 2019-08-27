@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  mount_uploader :video, VideoUploader
   paginates_per 10
   has_one_attached :image
 
