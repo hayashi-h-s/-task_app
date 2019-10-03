@@ -18,6 +18,7 @@ class Task < ApplicationRecord
     validate :validate_name_not_including_conmma
 
     belongs_to :user
+    #ユーザー１つに繋がっている
 
     scope :recent, -> { order(created_at: :desc)}
 

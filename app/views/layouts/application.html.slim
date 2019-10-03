@@ -14,13 +14,18 @@ html
       ul.navbar-nav.ml-auto
 
        - if current_user
-         li.nav-item= current_user.name
+         li.nav-item= link_to(@current_user.name, "/users/#{@current_user.id}")
          li.nav-item= link_to 'タスク一覧', tasks_path,class: 'nav-link'
          li.nav-item= link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
          li.nav-item= link_to 'ユーザー一覧', users_path ,class: 'nav-link'
        - else
          li.nav-item= link_to '新規ユーザー登録', new_user_path,class: 'nav-link'
          li.nav-item= link_to 'ログイン', login_path ,class: 'nav-link'
+         li
+           = form_for(:session, url: login_path) do |f|
+             = f.hidden_field :email, value: 'test@supplebox.jp'
+             = f.hidden_field :password, value: 'testsupple'
+             = link_to 'テストログイン', login_path ,class: 'nav-link'
 
     .container
       - if flash.notice.present?

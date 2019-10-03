@@ -13,12 +13,14 @@ table.table.table-hover
       td= @user.name
     tr
       th= User.human_attribute_name(:email)
-      td= @user.email    
+      td= @user.email
     tr
       th= User.human_attribute_name(:created_at)
       td= @user.created_at
     tr
       th= User.human_attribute_name(:updated_at)
       td= @user.updated_at
-= link_to '編集', edit_user_path,class: 'btn btn-primary mr-3'
-= link_to '削除', @user ,method: :delete, date: { conform: "タスク「#{@user.name}」を削除します。よろしいですか？"},class: 'btn btn-danger'
+      
+- if @user.id == @current_user.id
+   = link_to '編集', edit_user_path,class: 'btn btn-primary mr-3'
+   = link_to '削除', @user ,method: :delete, date: { conform: "タスク「#{@user.name}」を削除します。よろしいですか？"},class: 'btn btn-danger'

@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
-
+  
   has_many :tasks
+  #１対多の関係
 end

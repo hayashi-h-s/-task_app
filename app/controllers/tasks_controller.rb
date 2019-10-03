@@ -4,7 +4,7 @@ class TasksController < ApplicationController
 
   def index
     @q = current_user.tasks.ransack(params[:q])
-    @tasks = @q.result(distinct: true).page(params[:page]).per(10)
+    @tasks = @q.result(distinct: true).page(params[:page]).per(3)
   end
 
   def show
@@ -27,6 +27,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params.merge(user_id: current_user.id))
 
     if params[:back].present?
+      #登録確認機能
       render :new
       return
     end
