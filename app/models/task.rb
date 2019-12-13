@@ -1,4 +1,5 @@
 class Task < ApplicationRecord
+  mount_uploader :video, VideoUploader
   paginates_per 10
   has_one_attached :image
 
@@ -9,8 +10,6 @@ class Task < ApplicationRecord
   def self.ransackable_associations(auth_abject = nil)
     []
   end
-
-
 
     validates :name, presence: true
     validates :name, length: { maximum: 30 }
